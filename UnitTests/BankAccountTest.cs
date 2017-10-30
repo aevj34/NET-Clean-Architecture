@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Banking.Repository.Test
+namespace UnitTests
 {
     [TestClass]
     public class BankAccountTest
@@ -15,7 +15,7 @@ namespace Banking.Repository.Test
         [TestMethod]
         public void findByNumber()
         {
-            const String accountNumber="123-456-002";
+            const String accountNumber = "123-456-002";
 
             BankAccountRepositoryAdoNET account = new BankAccountRepositoryAdoNET();
             var actual = account.findByNumber(accountNumber);
@@ -23,5 +23,19 @@ namespace Banking.Repository.Test
             Assert.AreEqual(actual, actual);
 
         }
+
+        [TestMethod]
+        public void findByNumberEF()
+        {
+            const String accountNumber = "123-456-002";
+
+            BankAccountRepositoryEF account = new BankAccountRepositoryEF();
+            var actual = account.findByNumber(accountNumber);
+
+            Assert.AreEqual(actual, actual);
+
+        }
+
+
     }
 }

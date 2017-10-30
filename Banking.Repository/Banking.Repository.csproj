@@ -30,9 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,18 +52,69 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\BankAccountRepositoryAdoNET.cs" />
-    <Compile Include="Repositories\CustomerRepositoryAdoNET.cs" />
-    <Compile Include="Repositories\Functions.cs" />
+    <Compile Include="Repositories\AdoNET\BankAccountRepositoryAdoNET.cs" />
+    <Compile Include="Repositories\EntityFramework\BankAccountRepositoryEF.cs" />
+    <Compile Include="Repositories\AdoNET\CustomerRepositoryAdoNET.cs" />
+    <Compile Include="Repositories\AdoNET\Functions.cs" />
+    <Compile Include="Repositories\EntityFramework\BankingModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankingModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\EntityFramework\BankingModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\EntityFramework\BankingModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankingModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\EntityFramework\Bank_account.cs">
+      <DependentUpon>BankingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\EntityFramework\Customer.cs">
+      <DependentUpon>BankingModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Banking.Application\Banking.Application.csproj">
+      <Project>{e61a9435-75bf-44a7-99bd-7262fe7d4489}</Project>
+      <Name>Banking.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Banking.Domain\Banking.Domain.csproj">
       <Project>{de0244d4-e0ee-4fc9-8a30-980ef8a457f4}</Project>
       <Name>Banking.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Repositories\EntityFramework\BankingModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BankingModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <None Include="Repositories\EntityFramework\BankingModel.edmx.diagram">
+      <DependentUpon>BankingModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Repositories\EntityFramework\BankingModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BankingModel.edmx</DependentUpon>
+      <LastGenOutput>BankingModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Repositories\EntityFramework\BankingModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BankingModel.edmx</DependentUpon>
+      <LastGenOutput>BankingModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

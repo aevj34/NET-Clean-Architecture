@@ -45,11 +45,13 @@
     <Compile Include="Exceptions\InvalidTransferBankAccountException.cs" />
     <Compile Include="Exceptions\SameTransferBankAccountException.cs" />
     <Compile Include="Model\BankAccount.cs" />
+    <Compile Include="Model\BaseEntity.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IBankAccountRepository.cs" />
     <Compile Include="Repositories\ICustomerRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Repositories\ISpecification.cs" />
     <Compile Include="Services\TransferDomainService.cs" />
     <Compile Include="Shared\BankAccountState.cs" />
     <Compile Include="Shared\Error.cs" />
