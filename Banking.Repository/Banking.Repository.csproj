@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AdoNET\BankAccountRepositoryAdoNET.cs" />
+    <Compile Include="Repositories\AdoNET\DataReaderExtensiones.cs" />
     <Compile Include="Repositories\EntityFramework\BankAccountRepositoryEF.cs" />
     <Compile Include="Repositories\AdoNET\CustomerRepositoryAdoNET.cs" />
     <Compile Include="Repositories\AdoNET\Functions.cs" />

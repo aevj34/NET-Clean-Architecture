@@ -17,8 +17,20 @@ namespace UnitTests
         {
             const String accountNumber = "123-456-002";
 
-            BankAccountRepositoryAdoNET account = new BankAccountRepositoryAdoNET();
-            var actual = account.findByNumber(accountNumber);
+            BankAccountRepositoryAdoNet account = new BankAccountRepositoryAdoNet();
+            var actual = account.FindByNumber(accountNumber);
+
+            Assert.AreEqual(actual, actual);
+
+        }
+
+        [TestMethod]
+        public void findByNumber2()
+        {
+            const string accountNumber = "123-456-002";
+
+            var account = new BankAccountRepositoryAdoNet();
+            var actual = account.FindByNumber2(accountNumber);
 
             Assert.AreEqual(actual, actual);
 
@@ -30,7 +42,7 @@ namespace UnitTests
             const String accountNumber = "123-456-002";
 
             BankAccountRepositoryEF account = new BankAccountRepositoryEF();
-            var actual = account.findByNumber(accountNumber);
+            var actual = account.FindByNumber(accountNumber);
 
             Assert.AreEqual(actual, actual);
 

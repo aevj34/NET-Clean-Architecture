@@ -1,37 +1,36 @@
-﻿using Banking.Application.Dto;
-using Banking.Domain.Model;
+﻿using Banking.Domain.Model;
 using Banking.Domain.Repositories;
 using Banking.Repository.Repositories.EntityFramework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Banking.Repository.Repositories
 {
-   public class BankAccountRepositoryEF: IBankAccountRepository
+    public class BankAccountRepositoryEF : IBankAccountRepository
     {
 
-        public BankAccount findByNumber(string accountNumber)
+        public BankAccount FindByNumber(string accountNumber)
         {
 
-         BankingEntities dbContext= new BankingEntities();
+            var dbContext = new BankingEntities();
 
-         Bank_account account = (from a in dbContext.Bank_account
-                        where a.number.Equals(accountNumber)
-                        select a).FirstOrDefault();
+            var account = (from a in dbContext.Bank_account
+                           where a.number.Equals(accountNumber)
+                           select a).FirstOrDefault();
 
-        BankAccount viewModel = new BankAccount();
-        viewModel.setNumber(account.number);
-        viewModel.setBalance(account.balance);
-        viewModel.setIsLocked(account.locked);
+            var viewModel = new BankAccount();
 
-        return viewModel;
+            if (account == null) return viewModel;
+
+            viewModel.Number = account.number;
+            viewModel.Balance = account.balance;
+            viewModel.IsLocked = account.locked;
+
+            return viewModel;
 
         }
 
-        public BankAccount findByNumberLocked(string accountNumber)
+        public BankAccount FindByNumberLocked(string accountNumber)
         {
             throw new NotImplementedException();
         }

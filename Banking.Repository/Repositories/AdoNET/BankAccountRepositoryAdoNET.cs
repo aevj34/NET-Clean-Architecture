@@ -7,11 +7,11 @@ using System.Data;
 // ReSharper disable once CheckNamespace
 namespace Banking.Repository.Repositories
 {
-    public class BankAccountRepositoryAdoNet:IBankAccountRepository
+    public class BankAccountRepositoryAdoNet : IBankAccountRepository
     {
         public BankAccount FindByNumber2(string accountNumber)
         {
-            var bankAccount = new BankAccount();            
+            var bankAccount = new BankAccount();
             const string cmdText = "SELECT [Bank_Account_Id],[number], [balance],[locked],[Customer_Id] FROM Bank_Account WHERE number = @account_number";
             using (var con = new SqlConnection(Functions.GetConnectionString()))
             {
@@ -32,14 +32,14 @@ namespace Banking.Repository.Repositories
                 {
                     while (reader.Read())
                     {
-                        bankAccount.setId(reader.GetInt64(reader.GetOrdinal("Bank_Account_Id")));
-                        bankAccount.setNumber(reader.GetString(reader.GetOrdinal("number")));
-                        bankAccount.setBalance(reader.GetDecimal(reader.GetOrdinal("balance")));
-                        bankAccount.setIsLocked(reader.GetBoolean(reader.GetOrdinal("locked")));                       
+                        bankAccount.Id = reader.GetInt64(reader.GetOrdinal("Bank_Account_Id"));
+                        bankAccount.Number = reader.GetString(reader.GetOrdinal("number"));
+                        bankAccount.Balance = reader.GetDecimal(reader.GetOrdinal("balance"));
+                        bankAccount.IsLocked = reader.GetBoolean(reader.GetOrdinal("locked"));
                     }
                 }
             }
-            return bankAccount;            
+            return bankAccount;
         }
 
         public BankAccount FindByNumber(string accountNumber)
@@ -55,11 +55,11 @@ namespace Banking.Repository.Repositories
             BankAccount bankAccount = new BankAccount();
 
             if (reader.Read())
-            {      
-                bankAccount.setId(reader.GetInt64(reader.GetOrdinal("Bank_Account_Id")));
-                bankAccount.setNumber(reader.GetString(reader.GetOrdinal("number")));
-                bankAccount.setBalance(reader.GetDecimal(reader.GetOrdinal("balance")));
-                bankAccount.setIsLocked(reader.GetBoolean(reader.GetOrdinal("locked")));
+            {
+                bankAccount.Id = (reader.GetInt64(reader.GetOrdinal("Bank_Account_Id")));
+                bankAccount.Number = (reader.GetString(reader.GetOrdinal("number")));
+                bankAccount.Balance = (reader.GetDecimal(reader.GetOrdinal("balance")));
+                bankAccount.IsLocked = (reader.GetBoolean(reader.GetOrdinal("locked")));
             }
 
             command.Connection.Close();

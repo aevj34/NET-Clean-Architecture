@@ -1,104 +1,63 @@
 ﻿using Banking.Domain.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Banking.Domain.Model
 {
- public class BankAccount {
-	private long id;
-    private String number;
-    private decimal balance;
-    private bool isLocked;
-    private Customer customer;
-
-    public BankAccount() {
-    }
-
-    public void Lock() {
-        if (!this.isLocked) {
-            this.isLocked = true;
-        }
-    }
-
-    public void UnLock() {
-        if (this.isLocked) {
-            this.isLocked = false;
-        }
-    }
-
-    public bool hasIdentity() {
-        return !this.number.Trim().Equals("");
-    }
-
-    public void withdrawMoney(decimal amount) {
-        this.validateAmount(amount);
-        if (!this.canBeWithdrawed(amount)) {
-            throw new CannotWithdrawException();
-        }
-        this.balance = this.balance - amount;
-    }
-
-    public void depositMoney(decimal amount)  {
-        this.validateAmount(amount);
-        if (this.isLocked) {
-            throw new CannotDepositException();
-        }
-        this.balance =  this.balance + amount;
-    }
-
-    private void validateAmount(decimal amount)  {
-        if (Math.Sign(amount)<= 0) {
-            throw new AmountLessOrEqualToZeroException();
-        }
-    }
-
-    public bool canBeWithdrawed(decimal amount) {
-        return !this.isLocked && (this.balance.CompareTo(amount) >= 0);
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNumber() {
-        return this.number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public decimal getBalance() {
-        return this.balance;
-    }
-
-    public void setBalance(decimal balance)
+    public class BankAccount
     {
-        this.balance = balance;
-    }
+        public long Id;
+        public string Number;
+        public decimal Balance;
+        public bool IsLocked;
+        public Customer Customer;
 
-    public bool getIsLocked() {
-        return isLocked;
-    }
+        public void Lock()
+        {
+            if (!IsLocked)
+            {
+                IsLocked = true;
+            }
+        }
 
-    public void setIsLocked(bool isLocked)
-    {
-        this.isLocked = isLocked;
-    }
+        public void UnLock()
+        {
+            if (IsLocked)
+            {
+                IsLocked = false;
+            }
+        }
 
-    public Customer getCustomer() {
-        return customer;
-    }
+        public bool HasIdentity()
+        {
+            return !string.IsNullOrEmpty(Number);
+        }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+        public void WithdrawMoney(decimal amount)
+        {
+            ValidateAmount(amount);
+            if (!CanBeWithdrawed(amount)) throw new CannotWithdrawException();
+
+            Balance = Balance - amount;
+        }
+
+        public void DepositMoney(decimal amount)
+        {
+            ValidateAmount(amount);
+            if (IsLocked) throw new CannotDepositException();
+            
+            Balance = Balance + amount;
+        }        
+
+        private static void ValidateAmount(decimal amount)
+        {
+            if (Math.Sign(value: amount) <= 0) throw new AmountLessOrEqualToZeroException();
+        }
+
+        public bool CanBeWithdrawed(decimal amount)
+        {
+            return !IsLocked && (Balance.CompareTo(amount) >= 0);
+        }
+
+       
     }
-}
 }

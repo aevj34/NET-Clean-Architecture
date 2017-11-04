@@ -9,7 +9,7 @@ namespace Banking.Repository.Repositories
 {
     class Functions
     {
-       public static String GetConnectionString()
+       public static string GetConnectionString()
        {
            return ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
        }
